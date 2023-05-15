@@ -15,13 +15,14 @@ for (key, value) in pairs(tokiPonaDictionary)
     push!(tokiList,key)
 end
 
-
+println("var stimui = [")
 
 for word in words
     incorrect=rand(tokiList)
     while incorrect==word.toki
-        incorrect=random(tokiList)
+        incorrect=rand(tokiList)
     end
+    print("\t")
     print("{word: \""*word.toki*"\"")
     print(", translation: \""*word.english*"\"")
     print(", correct: \""*word.toki*"\"")
@@ -29,6 +30,8 @@ for word in words
     print(", imageFile: \"\\\"../img/"*word.toki*".png\\\"\"},")
     println()
 end
+
+println("];")
 
 #, correct: "suli", incorrect: "lili",
 
