@@ -1,17 +1,12 @@
-// Define the stimuli and questions
-var stimuli = [
-    {word: "suli", translation: "big", correct: "suli", incorrect: "lili"},
-    {word: "jan", translation: "person", correct: "jan", incorrect: "kala"},
-    {word: "ilo", translation: "tool", correct: "ilo", incorrect: "mani"}
-];
+import {stimuli} from './stimuli.js';
 
-// Define the trial structure
 var trial = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
         var word = jsPsych.timelineVariable('word', true);
         var translation = jsPsych.timelineVariable('translation', true);
-        return '<p>' + word + ' - ' + translation + '</p><p>press ENTER to continue.</p>';
+	var image = jsPsych.timelineVariable('imageFile', true);
+        return '<p style="font-size:60px;font-weight:bold;">' + word + '<img src=' + image + '>' + translation + '</p><p>press ENTER to continue.</p>';
     },
     choices: ['Enter'],
     post_trial_gap: 500,
@@ -56,7 +51,8 @@ for (var i = 0; i < stimuli.length; i++) {
         word: stimuli[i].word,
         translation: stimuli[i].translation,
         correct: stimuli[i].correct,
-        incorrect: stimuli[i].incorrect
+        incorrect: stimuli[i].incorrect,
+	imageFile: stimuli[i].imageFile
     };
     timeline.push({timeline: [trial, question_trial], timeline_variables: [trial_data]});
 }
